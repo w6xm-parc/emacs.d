@@ -1,0 +1,7 @@
+# .gitignore
+auto-save-list/
+elisp-autofmt-cache/
+eln-cache/
+elpa/
+history
+tmp/
