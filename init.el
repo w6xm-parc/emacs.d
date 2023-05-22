@@ -16,6 +16,8 @@
 (electric-pair-mode t)
 
 ;; housekeeping
+(set-register ?e '(file . "~/.emacs.d/init.el"))
+(set-register ?i '(file . "~/Documents/org/ideas.org"))
 (setq tetris-score-file "~/.emacs.d/tetris-scores")
 (setq save-place-file "~/.emacs.d/saved-places")
 (setq temporary-file-directory "~/.emacs.d/tmp")
@@ -39,25 +41,30 @@
 
 ;; List of packages
 (use-package ansible-vault)
+(use-package tex
+ :ensure auctex
+ :init
+ (setq TeX-PDF-mode t)
+ (setq TeX-auto-save t)
+ (setq TeX-parse-self t)
+ (setq-default TeX-master nil))
 (use-package browse-kill-ring)
-(use-package
- elisp-autofmt
+(use-package elisp-autofmt
  :commands (elisp-autofmt-mode elisp-autofmt-buffer)
  :hook (emacs-lisp-mode . elisp-autofmt-mode))
 (use-package ini-mode)
 (use-package json-mode)
-(use-package
- magit
+(use-package magit
  :commands magit-status
  :init (global-set-key (kbd "<f9>") 'magit-status))
 (use-package org-bullets)
 (use-package poetry)
-(use-package
- switch-window
+(use-package switch-window
  :commands switch-window
  :init (global-set-key (kbd "C-x o") 'switch-window))
 (use-package terraform-mode)
 (use-package yaml-mode)
+(use-package graphviz-dot-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -75,21 +82,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(connection-local-criteria-alist
-   '(((:application eshell) eshell-connection-default-profile)))
+   '(((:application eshell)
+      eshell-connection-default-profile)))
  '(connection-local-profile-alist
-   '((eshell-connection-default-profile (eshell-path-env-list))))
+   '((eshell-connection-default-profile
+      (eshell-path-env-list))))
  '(package-selected-packages
-   '(yaml-mode
-     terraform-mode
-     switch-window
-     poetry
-     org-bullets
-     magit
-     json-mode
-     ini-mode
-     elisp-autofmt
-     browse-kill-ring
-     ansible-vault)))
+   '(yaml-mode terraform-mode switch-window poetry org-bullets magit json-mode ini-mode elisp-autofmt browse-kill-ring ansible-vault)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
