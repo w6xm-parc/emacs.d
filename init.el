@@ -52,7 +52,9 @@
 (use-package elisp-autofmt
  :commands (elisp-autofmt-mode elisp-autofmt-buffer)
  :hook (emacs-lisp-mode . elisp-autofmt-mode))
+(use-package format-all)
 (use-package ini-mode)
+(use-package js2-mode)
 (use-package json-mode)
 (use-package magit
  :commands magit-status
@@ -65,6 +67,8 @@
 (use-package terraform-mode)
 (use-package yaml-mode)
 (use-package graphviz-dot-mode)
+(use-package pcap-mode)
+(use-package password-generator)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -82,13 +86,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(connection-local-criteria-alist
-   '(((:application eshell)
-      eshell-connection-default-profile)))
+   '(((:application eshell) eshell-connection-default-profile)))
  '(connection-local-profile-alist
-   '((eshell-connection-default-profile
-      (eshell-path-env-list))))
+   '((eshell-connection-default-profile (eshell-path-env-list))))
  '(package-selected-packages
-   '(yaml-mode terraform-mode switch-window poetry org-bullets magit json-mode ini-mode elisp-autofmt browse-kill-ring ansible-vault)))
+   '(format-all yaml-mode terraform-mode switch-window poetry org-bullets
+		magit json-mode ini-mode elisp-autofmt
+		browse-kill-ring ansible-vault))
+ '(safe-local-variable-values
+   '((ansible-vault-password-file . "~/.ansible-vault/parc-pass"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
