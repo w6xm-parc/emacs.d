@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (menu-bar-mode -1)
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
@@ -16,8 +17,6 @@
 (electric-pair-mode t)
 
 ;; housekeeping
-(set-register ?e '(file . "~/.emacs.d/init.el"))
-(set-register ?i '(file . "~/Documents/org/ideas.org"))
 (setq tetris-score-file "~/.emacs.d/tetris-scores")
 (setq save-place-file "~/.emacs.d/saved-places")
 (setq temporary-file-directory "~/.emacs.d/tmp")
@@ -26,6 +25,10 @@
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+
+;; Quick open named registers with C-x r j <register>
+(set-register ?e '(file . "~/.emacs.d/init.el"))
+(set-register ?i '(file . "~/Documents/org/ideas.org"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Package Stuff
@@ -66,9 +69,16 @@
  :init (global-set-key (kbd "C-x o") 'switch-window))
 (use-package terraform-mode)
 (use-package yaml-mode)
+(use-package verilog-mode
+  :init (add-to-list 'auto-mode-alist '("\\.[ds]?va?h?\\'" . verilog-mode)))
+(use-package verilog-ts-mode)
 (use-package graphviz-dot-mode)
 (use-package pcap-mode)
 (use-package password-generator)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; (require 'mu4e)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -90,9 +100,11 @@
  '(connection-local-profile-alist
    '((eshell-connection-default-profile (eshell-path-env-list))))
  '(package-selected-packages
-   '(format-all yaml-mode terraform-mode switch-window poetry org-bullets
-		magit json-mode ini-mode elisp-autofmt
-		browse-kill-ring ansible-vault))
+   '(ansible-vault auctex browse-kill-ring elisp-autofmt format-all
+		   graphviz-dot-mode ini-mode js2-mode json-mode magit
+		   org-bullets password-generator pcap-mode poetry
+		   switch-window terraform-mode verilog-ts-mode
+		   yaml-mode))
  '(safe-local-variable-values
    '((ansible-vault-password-file . "~/.ansible-vault/parc-pass"))))
 (custom-set-faces
@@ -101,3 +113,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'erase-buffer 'disabled nil)
