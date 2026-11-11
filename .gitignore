@@ -1,4 +1,5 @@
 # .gitignore
+\#*
 auto-save-list/
 elisp-autofmt-cache/
 eln-cache/
